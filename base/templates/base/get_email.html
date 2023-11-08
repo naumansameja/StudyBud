@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="layout__box">
+      <div class="layout__boxHeader">
+        <div class="layout__boxTitle">
+          <h3>Reset password</h3>
+        </div>
+      </div>
+      <div class="layout__body">
+        <h2 class="auth__tagline">Please enter the email of your account to reset password</h2>
+		{% if messages %}
+			{% for message in messages %}
+				{{message}}
+			{% endfor %}
+		{% endif %}
+		
+
+        <form class="form" action="" method="POST">
+          {% csrf_token %}
+          <div class="form__group form__group">
+            <label for="room_name">Email</label>
+            <input id="username" name="email" type="text" placeholder="Enter Email" />
+          </div>
+
+          <button class="btn btn--main" type="submit">
+
+            Reset
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

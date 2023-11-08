@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .home-container {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+            margin: 0;
+        }
+
+        .side-bar{
+            background-color: rgb(37, 82, 94);
+            padding: 10px;
+            color: white;
+        }
+        .side-bar a {
+            color: white;
+        }
+        .info {
+            background-color: rgb(160, 160, 240);
+            padding: 10px;
+        }
+        .recent-activity {
+            background-color: lightblue;
+            padding: 10px;
+        }
+
+
+        
+
+    </style>
+</head>
+<body>
+    {% extends "main.html" %}
+
+{% block content %}
+    <div class="home-container">
+
+        {% include "base/topics_component.html" %}
+
+
+
+        <div class="info">
+            {% if request.user.is_authenticated %}
+                <h3>Hi, <a href="{% url 'user-profile' request.user.id %}">{{request.user.username}}</a></h3>
+
+            {% endif %}
+            <a href="{% url 'create-room' %}">Make Room</a>
+
+            <h1 style="margin-bottom: 0;">Rooms</h1>
+            <p style="margin-top: 0;">Total {{room_count}} rooms</p>
+            <hr>
+            
+            {% include 'base/feed_component.html' %}
+        </div>
+        {% include "base/activity_component.html" %}
+
+    </div>
+{% endblock %}
+</body>
+</html>
+
+
+
