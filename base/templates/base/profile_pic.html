@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+    <div class="container">
+        <div class="layout__box">
+          <div class="layout__boxHeader">
+            <div class="layout__boxTitle">
+              <h3>Upload a profile Pic</h3>
+            </div>
+          </div>
+          <div class="layout__body">
+            {% if messages %}
+                {% for message in messages %}
+                    {{message}}
+                {% endfor %}
+            {% endif %}
+    
+            <form class="form" action="" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+    
+              {% for field in form %}
+              {{field.errors}}
+              <div class="form__group form__group">
+                <label for="room_name">{{field.label}}</label>
+                {{field}}
+              </div>
+              {% endfor %}
+    
+    
+              <button class="btn btn--main" type="submit">
+                
+    
+                upload
+              </button>
+            </form>
+    
+            <div class="auth__action">
+              <a href="{% url 'home' %}" class="btn btn--link">Skip for now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}

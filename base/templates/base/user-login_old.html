@@ -1,0 +1,40 @@
+{% extends "main.html" %}
+{% block content %}
+
+{% if not request.user.is_authenticated %}
+{% if messages %}
+			{% for message in messages %}
+				{{message}}
+			{% endfor %}
+		{% endif %}
+
+	{% if page == "login" %}
+
+		
+		<form action="" method="post">
+			{% csrf_token %}
+			<label >Username</label>
+			<input type="text" placeholder="Username" name="username" />
+			<label >Password</label>
+			<input type="password" placeholder="Password" name="password" />
+			<input type="submit" value="Login" />
+		</form>
+		<p>Haven't signed up yet?</p>
+		<a href="{% url 'register' %}">Sign up</a>
+
+	{% else %}
+		
+	<form action="" method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="Sign up" />
+	</form>
+		<p>Already registered?</p>
+		<a href="{% url 'login' %}">Login</a>
+
+	{% endif %}
+{% else %}
+<h3>You are already logged in as {{request.user.username}}</h3>
+<a href="{% url 'home' %}">Go Back to home page</a>
+{% endif %}
+{% endblock %}
